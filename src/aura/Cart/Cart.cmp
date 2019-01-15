@@ -1,0 +1,7 @@
+<aura:component >
+    <aura:attribute name="shoeList" type="Shoe__c[]" />
+    <aura:attribute name="totalPrice" type="Double"/>
+    <aura:handler event="c:ShoeEvent" action="{!c.processShoe}"/>
+
+    <aura:method name="initCart" action="{!c.doInit}"/>
+</aura:component>

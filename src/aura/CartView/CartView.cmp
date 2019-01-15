@@ -1,0 +1,85 @@
+<aura:component >
+    <aura:attribute name="shoeList" type="Shoe__c[]" />
+    <aura:attribute name="totalPrice" type="Double"/>
+    <aura:attribute name="showOrder" type="Boolean" default="false"/>
+    <aura:registerEvent name="deleteShoeFromCartEvent" type="c:DeleteShoeEvent"/>
+    
+    <div>
+    <div class="slds-align_absolute-center">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="slds-text-title_caps slds-text-align_center" scope="col">
+                        <div class="slds-truncate"></div>
+                    </th>
+                    <th class="slds-text-title_caps slds-text-align_center" scope="col">
+                        <div class="slds-truncate" title="Product">Quantity</div>
+                    </th>
+                    <th class="slds-text-title_caps slds-text-align_center" scope="col">
+                        <div class="slds-truncate" title="Product">Size</div>
+                    </th>
+                    <th class="slds-text-title_caps slds-text-align_center" scope="col">
+                        <div class="slds-truncate" title="Product">Product</div>
+                    </th>
+                    <th class="slds-text-title_caps slds-text-align_center" scope="col">
+                        <div class="slds-truncate" title="Price">Unit Price</div>
+                    </th>
+                    <th class="slds-text-title_caps slds-text-align_center" scope="col">
+                        <div class="slds-truncate" title="Price">Price</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.shoeList}" var="shoe">  
+                    
+                    <tr class="slds-line-height_reset">
+                        <th class="slds-text-title_caps slds-text-align_center table-qty-col-width" scope="col">
+                            <lightning:button label="Delete" variant="brand" onclick="{!c.deleteRecordFromCart}" name="{!shoe.Id}"/>
+                        </th>
+                        <th class="slds-text-title_caps table-qty-col-width" scope="col">
+                            <div class="slds-truncate slds-text-align_center" >{#shoe.Quantity__c}</div>
+                        </th>
+                        <th class="slds-text-title_caps slds-text-align_center" scope="col">
+                            <div class="slds-truncate" >{!shoe.Size__c}</div>
+                        </th>
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" >{!shoe.Name}</div>
+                        </th>
+                        <th class="slds-text-title_caps slds-text-align_right" scope="col">
+                            <div class="slds-truncate" title="Price">
+                                <lightning:formattedNumber class = "slds-m-around-medium " value="{!shoe.Price__c}" style="currency" currencyCode="EUR"/>   
+                            </div>
+                        </th>
+                        <th class="slds-text-title_caps slds-text-align_right" scope="col">
+                            <div class="slds-truncate" title="Price">
+                                <lightning:formattedNumber class = "slds-m-around-medium " value="{!shoe.Price__c * shoe.Quantity__c}" style="currency" currencyCode="EUR"/>   
+                            </div>
+                        </th>
+                    </tr>
+                </aura:iteration>
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                    <th class="slds-text-title_caps slds-text-align_right slds-text-color_success" >
+                        <strong>Total Price: <lightning:formattedNumber class = "slds-m-around-medium" value="{!v.totalPrice}" style="currency" currencyCode="EUR"/></strong>
+                    </th></tr>   
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="slds-m-top_large slds-m-bottom_large" >
+        <lightning:button label="Create Order" variant="brand" onclick="{!c.showOrderForm}"/>
+    </div>
+    <div class="slds-m-bottom_large slds-hide sls-box" aura:id="orderSection">
+        <c:OrderView shoesToOrder="{!v.shoeList}" totalPrice="{!v.totalPrice}"/>
+    </div>
+    
+</aura:component>

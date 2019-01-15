@@ -1,0 +1,13 @@
+<aura:component controller="LightningShopCenterCtrl">
+    
+    <aura:attribute name="shoeList" type="Shoe__c[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:SearchShoeEvent" action="{!c.getFilteredShoes}"/>
+
+    <div class="slds-grid slds-wrap grid_width">
+        <aura:iteration items="{!v.shoeList}" var="shoe">  
+            <c:Shoe shoe="{!shoe}"/>
+        </aura:iteration>
+    </div>
+    
+</aura:component>

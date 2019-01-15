@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="shoeToAdd" type="Shoe__c"/>
+</aura:event>

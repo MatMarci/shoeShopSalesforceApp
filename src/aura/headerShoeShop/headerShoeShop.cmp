@@ -1,0 +1,7 @@
+<aura:component >
+    
+    <div class="slds-m-around_small image-style">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/08/Boots.svg/1280px-Boots.svg.png" alt="Smiley face"/>
+    </div>
+
+</aura:component>

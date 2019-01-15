@@ -1,0 +1,34 @@
+<aura:component >
+    <aura:registerEvent name="openCartEvent" type="c:OpenCartEvent"/>
+    <aura:registerEvent name="searchShoeEvent" type="c:SearchShoeEvent"/> 
+    
+    <aura:attribute name="shoeList" type="Shoe__c[]" />
+    <aura:attribute name="totalPrice" type="Double"/>
+
+        <div class="slds-grid header-style slds-m-bottom_large">
+            <div class="slds-col slds-size_8-of-12"></div>
+            <div class="slds-col slds-size_2-of-12" onkeyup="{! c.handleKeyUp }">
+                <lightning:input
+                    aura:id="enter-search"
+                    name="enter-search"
+                    isLoading="{! v.issearching }"
+                    type="search"
+                />
+            </div>
+            <div class="slds-col slds-size_2-of-12">
+                <lightning:button variant="base"  onclick="{! c.openCart }">    
+                    <div class="slds-grid slds-m-right_medium">
+                        <div class="slds-text-heading_small slds-text-color_success price-text slds-align_absolute-center">
+                            ({!v.shoeList.length})
+                            <lightning:icon iconName="utility:cart" size="small" />
+                        </div>
+                        <div class="slds-align_absolute-center">
+                            <lightning:formattedNumber value="{!v.totalPrice}" style="currency" currencyCode="EUR"/>
+                        </div>
+                    </div>
+                </lightning:button>
+            </div>
+        </div>
+
+        <!-->TODO: add discount<-->
+</aura:component>

@@ -1,0 +1,47 @@
+<aura:component > 
+    
+    <aura:attribute name="options" type="List" default="[
+    {'label': '35', 'value': '35'},
+    {'label': '36', 'value': '36'},
+    {'label': '37', 'value': '37'},
+    {'label': '38', 'value': '38'},
+    {'label': '39', 'value': '39'},
+    {'label': '40', 'value': '40'},
+    {'label': '41', 'value': '41'},
+    {'label': '42', 'value': '42'},
+    {'label': '43', 'value': '43'}
+    ]"/>
+
+    <aura:attribute name="shoe" type="Shoe__c" />
+    <aura:registerEvent name="addShoeToCartEvent" type="c:ShoeEvent"/>
+
+    <div class="slds-p-around_medium sld-col slds-medium-size_1-of-5">
+        <div class="shoe-box">
+
+            <div class="custom-center ">
+                <img class="custom-image" src="{!v.shoe.ImageURL__c}" />  
+                <p class="slds-text-body_small slds-p-around_x-small max-lines">{!v.shoe.Name}</p>
+                
+                <div>
+                    <div class="picklist-size slds-size_2-of-5">
+                        <lightning:combobox name="size" value="{!v.shoe.Size__c}" placeholder="Size" options="{!v.options}" />
+                    </div>
+
+                    <div class="slds-text-color_error price-text slds-text-body_medium slds-m-around-medium">
+                        <lightning:formattedNumber class = "slds-m-around-medium" 
+                                                    value="{!v.shoe.Price__c}" 
+                                                    style="currency" 
+                                                    currencyCode="EUR"/>
+                    </div>
+                    <lightning:input class="inputNumber-position slds-size_3-of-12 numberInput-size" type="number" aura:id="ShoeQuantity" value="{!v.shoe.Quantity__c}"/>
+                </div>
+            </div>
+
+            <div class="custom-center button-style">
+                <lightning:buttonIcon iconName="utility:add" variant="bare" size="large"  onclick="{! c.addToCart }"/>
+            </div>
+
+        </div>
+    </div>
+    
+</aura:component>

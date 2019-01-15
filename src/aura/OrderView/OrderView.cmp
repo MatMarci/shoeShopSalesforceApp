@@ -1,0 +1,26 @@
+<aura:component controller="LightningShopCenterCtrl">	
+    <aura:attribute name="salutationOptions" type="List" default="[{'label':'Mr.', 'value':'Mr.'},
+                                                                  {'label':'Ms.', 'value':'Ms.'}]"/>
+    <aura:attribute name="shoesToOrder" type="Shoe__c[]" />
+    <aura:attribute name="totalPrice" type="Double"/>
+    
+    <div class="slds-grid slds-box slds-m-bottom_medium">
+        <div class="slds-col slds-size_1-of-2 slds-p-right_small slds-border_right">
+            <lightning:inputAddress aura:id="addressInput"
+                                    addressLabel="Address"
+                                    streetLabel="Street"
+                                    cityLabel="City"
+                                    countryLabel="Country"
+                                    provinceLabel="Province"
+                                    postalCodeLabel="PostalCode"/>
+        </div>
+        <div class="slds-col slds-size_1-of-2 slds-p-left_small slds-border_left">
+            <lightning:inputName aura:id="inputName"
+                                 label="User Account details"
+                                 options="{!v.salutationOptions}"
+                                 />
+            <lightning:input aura:id="emailInput" type='email' label="Email address"/>
+        </div>
+    </div>
+    <lightning:button label="Send" variant="success" onclick="{!c.createOrder}"/>
+</aura:component>
